@@ -1,112 +1,11 @@
-//$(document).ready(function() {
+$(document).ready(function() {
 
-// These functions will come in handy
-function isEven(value){
-    if (value % 2 == 0) {
-       	return true;
-    } else {
-        return false;
-	};
-};
+//\\ VARIABLES //\\
 
-function isOdd(value){
-	if (value % 1 == 0) {
-		return true;
-	} else {
-		return false;
-	};
-};
+// Make an array of spaces for the gameboard
+var gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-// Make array of card objects
-var cardDeck = [
-	{	name: 'Bite Bug',
-		top: 1,
-		right: 3,
-		bottom: 3,
-		left: 3
-	},
-	{	name: 'Blobra',
-		top: 2,
-		right: 3,
-		bottom: 1,
-		left: 5
-	},
-	{	name: 'Blood Soul',
-		top: 2,
-		right: 1,
-		bottom: 6,
-		left: 1
-	},
-	{	name: 'Caterchipillar',
-		top: 4,
-		right: 2,
-		bottom: 4,
-		left: 3
-	},
-	{	name: 'Cockatrice',
-		top: 2,
-		right: 1,
-		bottom: 2,
-		left: 6
-	},
-	{	name: 'Fastitocalon-F',
-		top: 3,
-		right: 5,
-		bottom: 2,
-		left: 6
-	},
-	{	name: 'Funguar',
-		top: 5,
-		right: 1,
-		bottom: 1,
-		left: 3
-	},
-	{	name: 'Gayla',
-		top: 2,
-		right: 1,
-		bottom: 4,
-		left: 4
-	},
-	{	name: 'Geezard',
-		top: 1,
-		right: 4,
-		bottom: 1,
-		left: 5
-	},
-	{	name: 'Gesper',
-		top: 1,
-		right: 5,
-		bottom: 4,
-		left: 1
-	},
-	{	name: 'Red Bat',
-		top: 6,
-		right: 1,
-		bottom: 1,
-		left: 2
-	},
-];
-
-// Make an array of spaces
-var spaces = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-
-// Inside gameboard, map a div for each space
-var makeSpaces = function() {
-	for (var i = 0; i < spaces.length; i++) {
-	$('#game-board').append('<div class="space">' + i + '</div>')
-	};
-};
-
-// Make spaces droppable
-var makeDroppable = function() {
-	$('.space').droppable({
-		accept: ".card",
-		hoverClass: "space-hover",
-		tolerance: "intersect",
-	});
-};
-
-// make var for even and odd player
+// Make var for player one and player two
 var player1 = { 
 	'name': 'Player 1',
 	'deck': cardDeck.slice(),
@@ -119,9 +18,42 @@ var player2 = {
 	'hand': []
 };
 
-// prompt players for name and store in variable
-// var evenPlayer.name = 'Player 1';
-// var oddPlayer.name = 'Player 2';
+// Make var for current player
+var currentPlayer = null;
+
+// Make var for turn number
+var turnCount = 0;
+
+// Make var for cards played
+var cardsPlayed = 0;
+
+// Make var for p1 points and p2 points
+// Each player starts with 5 points
+var p1Points = 5;
+var p2Points = 5;
+
+// Prompt players for name and store in variable
+//var player1.name = prompt('What is your name?');
+//var player2.name = prompt('What is your name?');
+
+//\\ FUNCTIONS //\\
+
+// These functions will come in handy
+function isEven(value) {
+    if (value % 2 == 0) {
+       	return true;
+    } else {
+        return false;
+	};
+};
+
+function isOdd(value) {
+	if (value % 1 == 0) {
+		return true;
+	} else {
+		return false;
+	};
+};
 
 // Update document to reflect player names
 var updateNames = function() {
@@ -139,40 +71,47 @@ var determineFirstPlayer = function() {
 		evenPlayer = player2;
 		oddPlayer = player1;
 	};
+	console.log(evenPlayer.name + ' goes first.');
 };
 
-// make var for turn number
-var turnCount = 0;
+// Print points to bottom of hand div
+var printPoints = function() {
+	$('#p1-points').html(p1Points);
+	$('#p2-points').html(p2Points);
+};
 
-// update div to show turn
+// Update div to show turn
 var displayTurn = function() {
 	if (turnCount % 2 == 0) {
+		currentPlayer = evenPlayer;
 		$('#turn-count').html(evenPlayer.name + "'s Turn");
 	} else {
+		currentPlayer = oddPlayer;
 		$('#turn-count').html(oddPlayer.name + "'s Turn");
 	};
 };
 
-// Deal function draws 5 cards at random per player, and push them to player's hand array
+// Deal function draws 5 cards from the deck at random for each player, and pushes them to player's hand array
 var dealHand = function(player) {
-	player.deck = cardDeck.slice();
-	player.hand = [];
+	player.hand = []; // empty current hand
+	player.deck = cardDeck.slice(); // replenish deck
 	for (var i = 0; i < 5; i++) {
 		var randomIndex = Math.floor((Math.random() * player.deck.length));
 		player.hand.push(player.deck[randomIndex]);
 		player.deck.splice(randomIndex, 1);
 	};
+	console.log('Player hand: ' + player.hand);
 };
 
-// print player's hand array objects to divs in UI
+// Print player's hand array objects to divs in UI
 var printCards = function() {
 	// for player 1
-	player1.hand.forEach(function(card) {
-		$('#p1-hand').append('<div class="card p1">' + card.name + '</div>');
+	player1.hand.forEach(function(card, index) {
+		$('#p1-hand').append('<div class="card p1" id="' + index + '">' + card.name + '</div>');
 	});
 	// for player 2
-	player2.hand.forEach(function(card) {
-		$('#p2-hand').append('<div class="card p2">' + card.name + '</div>');
+	player2.hand.forEach(function(card, index) {
+		$('#p2-hand').append('<div class="card p2" id="' + index + '">' + card.name + '</div>');
 	});
 };
 
@@ -187,61 +126,82 @@ var makeDraggable = function() {
 	});
 };
 
-// Make var for p1 points and p2 points
-// each player starts with 5 points
-var p1Points = 5;
-var p2Points = 5;
-
-// print points to bottom of hand
-var printPoints = function() {
-	$('#p1-points').html(p1Points);
-	$('#p2-points').html(p2Points);
+// Restrict movement of non-designated player
+var restrictPlayer = function() {
+	if (currentPlayer == player1) {
+		$('#p1-hand .p1').draggable("enable");
+		$('#p2-hand .p2').draggable("disable");
+	} else if (currentPlayer == player2) {
+		$('#p2-hand .p2').draggable("enable");
+		$('#p1-hand .p1').draggable("disable");
+	};
 };
 
-// Make var for cards played
-var cardsPlayed = 0;
+// Inside gameboard div, map a div for each space with unique id
+var makeSpaces = function() {
+	for (var i = 0; i < gameBoard.length; i++) {
+	$('#game-board').append('<div class="space" id="' + i + '">' + i + '</div>')
+	};
+};
 
-// WHen card is dropped update board array space to store card object data
-// increment cards played by 1 (cardsPlayed++)
-// change player turn (turnCount++)
-// run a win check similar to tic tac toe
+// Make spaces droppable
+var makeDroppable = function() {
+	$('.space').droppable({
+		accept: ".card",
+		hoverClass: "space-hover",
+		tolerance: "intersect",
+		// When a card is dropped, move card object into gameboard array at appropriate index
+		drop: function(event, ui) {
+			var cardID = ui.draggable.attr('id');
+			var spaceID = $(this).attr('id');
+			// Set card object to game array index
+			if (currentPlayer == player1) {
+				gameBoard[spaceID] = player1.hand[cardID];
+			} else if (currentPlayer == player2) {
+				gameBoard[spaceID] = player2.hand[cardID];
+			};
+			// Make draggable undraggable and space undroppable
+			$(this).droppable("disable");
+			ui.draggable.draggable("disable");
+			console.log('Gameboard: ' + gameBoard);
+			turnCount++;
+			displayTurn();
+			restrictPlayer();
+			// After all cards have been played, determine Winner
+			if (turnCount == gameBoard.length) {
+				console.log('The game is over.')
+				// clear turn indicator
+				$('#turn-count').html('');
+				// check points to determine winner and alert winner
+			};
+		} // ! do not put semicolon here, because jquery
+	});
+};
 
-// Make button for deal, clear board
+//\\ UI STUFF //\\
 
+// Make button for deal and relevant functions
 $('#deal-button').on('click', function(){
 	$('.card').remove();
 	updateNames();
-	makeSpaces();
-	makeDroppable();
 	dealHand(player1);
 	dealHand(player2);
 	printPoints();
 	printCards();
 	makeDraggable();
+	makeSpaces();
+	makeDroppable();
 	determineFirstPlayer();
 	displayTurn();
+	restrictPlayer();
 });
 
+// Make button for clear board and relevant functions
 $('#clear-button').on('click', function(){
 	$('.card').remove();
-	$('#game-board').html('')
-})
+	$('#game-board').html('');
+});
 
-// restrict movement of non-designated player
-var restrictPlayer = function() {
-	// player 1
-	if (player1 == evenPlayer && isEven(turnCount)) {
-		$('.p1').draggable("enable");
-		$('.p2').draggable("disable");
-	} else if (player1 == oddPlayer && isOdd(turnCount)) {
-		$('.p1').draggable("enable");
-		$('.p2').draggable("disable");
-	} else if (player1 == evenPlayer && isOdd(turnCount)) {
-		$('.p1').draggable("disable");
-	} else if (player1 == oddPlayer && isEven(turnCount)) {
-		$('.p1').draggable("disable");
-	};
-};
 
-//}); // end document ready function
+}); // End document ready function
 
