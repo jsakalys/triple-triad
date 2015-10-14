@@ -120,12 +120,16 @@ var assignColor = function(player, color) {
 var printCards = function() {
 	// for player 1
 	player1.hand.forEach(function(card, index) {
-		$('#p1-hand').append('<div class="card draggable p1" data-name="' + card.name + '" id="' + index + '">' + card.name + '</div>');
+		$('#p1-hand').append('<div class="card draggable p1" data-name="' + card.name + '" id="' + index + '"><div class="card-front">Front: ' + card.name + '</div><div class="card-back">Back: ' + card.name + '</div></div>');
 	});
 	// for player 2
 	player2.hand.forEach(function(card, index) {
-		$('#p2-hand').append('<div class="card draggable p2" data-name="' + card.name + '" id="' + index + '">' + card.name + '</div>');
+		$('#p2-hand').append('<div class="card draggable p2" data-name="' + card.name + '" id="' + index + '"><div class="card-front">Front: ' + card.name + '</div><div class="card-back">Back: ' + card.name + '</div></div>');
 	});
+};
+
+var animateCards = function() {
+
 };
 
 // Make cards draggable
@@ -135,8 +139,18 @@ var makeDraggable = function() {
 		revert: 'invalid',
 		snap: ".space",
 		snapMode: "inner",
-		snapTolerance: 65
+		snapTolerance: 65,
+		zIndex: 100
 	});
+};
+
+// make cards flippable
+var makeFlippable = function() {
+	$(".card").flip({
+  		axis: 'y',
+  		trigger: 'manual'
+	});
+	$('div .p2').flip('toggle'); // flip player 2's cards over
 };
 
 // Restrict movement of non-designated player
@@ -183,7 +197,7 @@ var makeDroppable = function() {
 						currentPlayer.points++;
 						inactivePlayer.points--;
 						adjacentCard.color = currentCard.color;
-						$('div [data-name="' + adjacentCard.name + '"]').css("background-color", adjacentCard.color);
+						$('div [data-name="' + adjacentCard.name.toString() + '"]').flip('toggle');
 					};
 				} else if (currentCard[currentDirection] < adjacentCard[adjacentDirection]) {
 						console.log(currentCard[currentDirection] + ' has a lower rank than ' + adjacentCard[adjacentDirection]);
@@ -265,7 +279,9 @@ $('#deal-button').on('click', function(){
 	printNames();
 	printPoints();
 	printCards();
+	animateCards();
 	makeDraggable();
+	makeFlippable();
 	makeSpaces();
 	makeDroppable();
 	restrictPlayer();

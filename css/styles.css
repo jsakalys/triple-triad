@@ -86,18 +86,25 @@ div {
 	width: 100px;
 	height: 130px;
 	border: 1px solid black;
-	background-color: red;
 	margin-bottom: -65px;
+}
+
+.card-front {
+	background-color: blue;
+}
+
+.card-back {
+	background-color: red;
 }
 
 .draggable {
 	/* helps to prevent a jquery error when it tries to re-enable dragging */
 }
 
-.p1 {
+/*.p1 {
 	background-color: blue;
 }
 
 .p2 {
 	background-color: red;
-}
+}*/
