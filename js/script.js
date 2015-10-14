@@ -142,11 +142,11 @@ var makeDraggable = function() {
 // Restrict movement of non-designated player
 var restrictPlayer = function() {
 	if (currentPlayer == player1) {
-		$('#p1-hand .draggable .p1').draggable("enable");
-		$('#p2-hand .draggable .p2').draggable("disable");
+		$('#p1-hand .draggable').draggable("enable");
+		$('#p2-hand .draggable').draggable("disable");
 	} else if (currentPlayer == player2) {
-		$('#p2-hand .draggable .p2').draggable("enable");
-		$('#p1-hand .draggable .p1').draggable("disable");
+		$('#p2-hand .draggable').draggable("enable");
+		$('#p1-hand .draggable').draggable("disable");
 	};
 };
 
@@ -253,6 +253,7 @@ var makeDroppable = function() {
 
 			// After all cards have been played, determine Winner
 			if (turnCount == gameBoard.length) {
+				$('#extra').html('The game is over.')
 				console.log('The game is over.')
 				// clear turn indicator
 				$('#turn-count').html('');
