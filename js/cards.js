@@ -1,5 +1,5 @@
 // Make array of card objects
-var cardDeck = [
+var masterDeck = [
 	{	name: 'Bite Bug',
 		top: 1,
 		right: 3,
