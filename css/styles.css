@@ -90,6 +90,10 @@ div {
 	margin-bottom: -65px;
 }
 
+.draggable {
+	/* helps to prevent a jquery error when it tries to re-enable dragging */
+}
+
 .p1 {
 	background-color: blue;
 }

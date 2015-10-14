@@ -120,11 +120,11 @@ var assignColor = function(player, color) {
 var printCards = function() {
 	// for player 1
 	player1.hand.forEach(function(card, index) {
-		$('#p1-hand').append('<div class="card p1" data-name="' + card.name + '" id="' + index + '">' + card.name + '</div>');
+		$('#p1-hand').append('<div class="card draggable p1" data-name="' + card.name + '" id="' + index + '">' + card.name + '</div>');
 	});
 	// for player 2
 	player2.hand.forEach(function(card, index) {
-		$('#p2-hand').append('<div class="card p2" data-name="' + card.name + '" id="' + index + '">' + card.name + '</div>');
+		$('#p2-hand').append('<div class="card draggable p2" data-name="' + card.name + '" id="' + index + '">' + card.name + '</div>');
 	});
 };
 
@@ -142,11 +142,11 @@ var makeDraggable = function() {
 // Restrict movement of non-designated player
 var restrictPlayer = function() {
 	if (currentPlayer == player1) {
-		$('#p1-hand .p1').draggable("enable");
-		$('#p2-hand .p2').draggable("disable");
+		$('#p1-hand .draggable .p1').draggable("enable");
+		$('#p2-hand .draggable .p2').draggable("disable");
 	} else if (currentPlayer == player2) {
-		$('#p2-hand .p2').draggable("enable");
-		$('#p1-hand .p1').draggable("disable");
+		$('#p2-hand .draggable .p2').draggable("enable");
+		$('#p1-hand .draggable .p1').draggable("disable");
 	};
 };
 
@@ -166,9 +166,10 @@ var makeDroppable = function() {
 		// When a card is dropped, move card object into gameboard array at appropriate index
 		drop: function(event, ui) {
 			// Make draggable undraggable and space undroppable
-			$(this).droppable("disable");
-			ui.draggable.draggable("disable");
-
+			$(this).droppable("destroy"); // revent this space from ever being droppable again
+			ui.draggable.draggable("destroy"); // prevent this card from ever being draggable again
+			ui.draggable.removeClass("draggable"); // remove draggable class, so to prevent jquery error when it attempts to re-enable
+			
 			// Set card object to game array index 
 			var cardID = parseInt(ui.draggable.attr('id'));
 			var spaceID = parseInt($(this).attr('id'));
@@ -265,7 +266,7 @@ var makeDroppable = function() {
 function reset() {
 	cardDeck = masterDeck.map(function(card) {
 	return card;
-	});
+	}); // repopulate card deck
 	$('.card').remove(); // take cards from previous game off the board
 	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // reset board array
 	turnCount = 0; // reset turn count
