@@ -1,6 +1,4 @@
-$(document).ready(function() {
-
-//\\ VARIABLES //\\
+//\\ GLOBAL VARIABLES //\\
 
 // Make a temporary deck from which to draw
 var cardDeck = masterDeck.map(function(card) {
@@ -10,7 +8,7 @@ var cardDeck = masterDeck.map(function(card) {
 // Make an array of spaces for the gameboard
 var gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-// Make var for player one and player two
+// Make an object for player one and player two
 var player1 = { 
 	'name': 'Player 1',
 	'hand': [],
@@ -95,8 +93,8 @@ var printTurn = function() {
 
 // Print points to bottom of hand div
 var printPoints = function() {
-	$('#p1-points').html(player1.points);
-	$('#p2-points').html(player2.points);
+	$('#p1-points').html('Points: ' + player1.points);
+	$('#p2-points').html('Points: ' + player2.points);
 };
 
 // Deal function draws 5 cards from the deck at random for each player, and pushes them to player's hand array
@@ -128,8 +126,19 @@ var printCards = function() {
 	});
 };
 
+// Display a chain animation when new card divs are dealt
 var animateCards = function() {
-
+	var dealDuration = 400;
+	$('div.card:nth-child(5)').animate({ "top": "0px" }, {duration:dealDuration, complete: function() {
+		$('div.card:nth-child(4)').animate({ "top": "0px" }, {duration:dealDuration, complete: function() {
+			$('div.card:nth-child(3)').animate({ "top": "0px" }, {duration:dealDuration, complete: function() {
+				$('div.card:nth-child(2)').animate({ "top": "0px" }, {duration:dealDuration, complete: function() {
+					$('div.card:nth-child(1)').animate({ "top": "0px" }, {duration:dealDuration, complete: function() {
+					}});
+				}});
+			}});
+		}});
+	}});
 };
 
 // Make cards draggable
@@ -144,7 +153,7 @@ var makeDraggable = function() {
 	});
 };
 
-// make cards flippable
+// Initialize jquery flippable for all card divs
 var makeFlippable = function() {
 	$(".card").flip({
   		axis: 'y',
@@ -171,7 +180,7 @@ var makeSpaces = function() {
 	};
 };
 
-// Make spaces droppable
+// Make spaces droppable and execute check on drop
 var makeDroppable = function() {
 	$('.space').droppable({
 		accept: ".card",
@@ -180,8 +189,8 @@ var makeDroppable = function() {
 		// When a card is dropped, move card object into gameboard array at appropriate index
 		drop: function(event, ui) {
 			// Make draggable undraggable and space undroppable
-			$(this).droppable("destroy"); // revent this space from ever being droppable again
-			ui.draggable.draggable("destroy"); // prevent this card from ever being draggable again
+			$(this).droppable("destroy"); // Prevent this space from ever being droppable again
+			ui.draggable.draggable("destroy"); // Prevent this card from ever being draggable again
 			ui.draggable.removeClass("draggable"); // remove draggable class, so to prevent jquery error when it attempts to re-enable
 			
 			// Set card object to game array index 
@@ -190,6 +199,7 @@ var makeDroppable = function() {
 			var currentCard = gameBoard[spaceID] = currentPlayer.hand[cardID];
 			console.log(gameBoard);
 
+			// Make a function to compare dropped card to adjacent card
 			var compareCards = function(currentDirection, adjacentDirection) {
 				if (currentCard[currentDirection] > adjacentCard[adjacentDirection]) {
 					if (currentCard.color !== adjacentCard.color) {
@@ -206,25 +216,25 @@ var makeDroppable = function() {
 				};
 			};
 
-			// compare card's top value to card above it's bottom value
+			// Compare card's top value to card above it's bottom value
 			var adjacentCard = gameBoard[spaceID-3];
 			if (spaceID > 2 && (typeof adjacentCard == 'object')) {
 				compareCards("top", "bottom");
 			};
 
-			// compare card's bottom value to card below it's top value
+			// Compare card's bottom value to card below it's top value
 			adjacentCard = gameBoard[spaceID+3];
 			if (spaceID < 6  && (typeof adjacentCard == 'object')) {
 				compareCards("bottom", "top")
 			};
 
-			// compare card's right value to card after it's left value
+			// Compare card's right value to card after it's left value
 			adjacentCard = gameBoard[spaceID+1];
 			if (spaceID % 3 !== 2 && (typeof adjacentCard == 'object')) {
 				compareCards("right", "left");
 			};
 
-			// compare card's left value to card to the before it's right value
+			// Compare card's left value to card to the before it's right value
 			adjacentCard = gameBoard[spaceID-1];
 			if (spaceID % 3 !== 0 && (typeof adjacentCard == 'object')) {
 				compareCards("left", "right");
@@ -232,15 +242,14 @@ var makeDroppable = function() {
 
 			// Update turn and call related functions
 			turnCount++;
-			printTurn();
-			printPoints();
+			updateInfo();
 			restrictPlayer();
 
 			// After all cards have been played, determine Winner
 			if (turnCount == gameBoard.length) {
-				// clear turn indicator
+				// Clear turn indicator
 				$('#turn-count').html('The game is over.');
-				// check points to determine winner and alert winner
+				// Check points to determine winner and alert winner
 				if (player1.points > player2.points) {
 					$('#extra').html(player1.name.toString() + ' wins.');
 				} else if (player2.points > player1.points) {
@@ -249,50 +258,75 @@ var makeDroppable = function() {
 					$('#extra').html('Draw.');
 				};
 			};
-		} // ! do not put semicolon here, because jquery
+		} // ! Do not put semicolon here, because jquery
 	});
 };
 
-// Make a function to reset items at end of game
-function reset() {
-	cardDeck = masterDeck.map(function(card) {
-	return card;
-	}); // repopulate card deck
-	$('.card').remove(); // take cards from previous game off the board
-	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // reset board array
-	turnCount = 0; // reset turn count
-	player1.points = 5; // reset points
+//\\ Putting it all together //\\
+
+function resetGame() {
+	// Repopulate card deck
+	cardDeck = masterDeck.map(function(card) { return card }); 
+	// Empty all containers of their elements
+	$('#game-board').html('')
+	$('#p1-hand').html(''); 
+	$('#p2-hand').html('');
+	// Reset board array
+	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]; 
+	// Reset turn count
+	turnCount = 0;
+	// Reset points
+	player1.points = 5; 
 	player2.points = 5;
 };
 
-//\\ UI STUFF //\\
-
-// Make button for deal and to call relevant functions
-$('#deal-button').on('click', function(){
-	reset(); // reset all values to default
+var dealNew = function() {
 	dealHand(player1);
 	dealHand(player2);
 	assignColor(player1, "blue");
 	assignColor(player2, "red");
-	determineFirstPlayer();
+}
+
+var updateInfo = function() {
 	printTurn();
 	printNames();
 	printPoints();
+};
+
+var initializeCards = function() {
 	printCards();
 	animateCards();
 	makeDraggable();
 	makeFlippable();
+};
+
+var initializeSpaces = function() {
 	makeSpaces();
 	makeDroppable();
-	restrictPlayer();
-	$('.space').droppable("enable"); // fixes disable override from previous game (must come after makespaces)
-});
+}
 
-// Make button for clear board and relevant functions
-$('#clear-button').on('click', function(){
-	$('.card').remove();
-	$('#game-board').html('');
-});
+
+
+$(document).ready(function() {
+
+	//\\ UI STUFF //\\
+
+	// Make button for deal and to call relevant functions
+	$('#deal-button').on('click', function(){
+		resetGame();
+		dealNew();
+		determineFirstPlayer();
+		updateInfo();
+		initializeCards();
+		initializeSpaces();
+		restrictPlayer();
+		$('.space').droppable("enable"); // fixes disable override from previous game (must come after makespaces)
+	});
+
+	// Make button for clear board and relevant functions
+	$('#clear-button').on('click', function(){
+		resetGame();
+	});
 
 }); // End document ready function
 

@@ -87,6 +87,7 @@ div {
 	height: 130px;
 	border: 1px solid black;
 	margin-bottom: -65px;
+	top: -200px;
 }
 
 .card-front {
