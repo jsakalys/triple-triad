@@ -176,73 +176,44 @@ var makeDroppable = function() {
 			var currentCard = gameBoard[spaceID] = currentPlayer.hand[cardID];
 			console.log(gameBoard);
 
+			var compareCards = function(currentDirection, adjacentDirection) {
+				if (currentCard[currentDirection] > adjacentCard[adjacentDirection]) {
+					if (currentCard.color !== adjacentCard.color) {
+						console.log(currentCard[currentDirection] + ' has a higher rank than ' + adjacentCard[adjacentDirection]);
+						currentPlayer.points++;
+						inactivePlayer.points--;
+						adjacentCard.color = currentCard.color;
+						$('div [data-name="' + adjacentCard.name + '"]').css("background-color", adjacentCard.color);
+					};
+				} else if (currentCard[currentDirection] < adjacentCard[adjacentDirection]) {
+						console.log(currentCard[currentDirection] + ' has a lower rank than ' + adjacentCard[adjacentDirection]);
+				} else { 
+						console.log(currentCard[currentDirection] + ' has the same rank as ' + adjacentCard[adjacentDirection]);
+				};
+			};
 
 			// compare card's top value to card above it's bottom value
 			var adjacentCard = gameBoard[spaceID-3];
 			if (spaceID > 2 && (typeof adjacentCard == 'object')) {
-			 	if (currentCard.top > adjacentCard.bottom) {
-					console.log(currentCard.top + ' has a higher rank than ' + adjacentCard.bottom);
-					if (currentCard.color !== adjacentCard.color) {
-					currentPlayer.points++;
-					inactivePlayer.points--;
-					};
-					adjacentCard.color = currentCard.color;
-					$('div [data-name="' + adjacentCard.name + '"]').css("background-color", adjacentCard.color);
-				} else if (currentCard.top < adjacentCard.bottom) {
-					console.log(currentCard.top + ' has a lower rank than ' + adjacentCard.bottom);
-				} else { 
-					console.log(currentCard.top + ' has the same rank as ' + adjacentCard.bottom);
-				};
+				compareCards("top", "bottom");
 			};
 
 			// compare card's bottom value to card below it's top value
 			adjacentCard = gameBoard[spaceID+3];
 			if (spaceID < 6  && (typeof adjacentCard == 'object')) {
-				if (currentCard.bottom > adjacentCard.top) {
-					console.log(currentCard.bottom + ' has a higher rank than ' + adjacentCard.top);
-					if (currentCard.color !== adjacentCard.color) {
-					currentPlayer.points++;
-					inactivePlayer.points--;
-					};
-					adjacentCard.color = currentCard.color;
-					$('div [data-name="' + adjacentCard.name + '"]').css("background-color", adjacentCard.color);
-				} else if (currentCard.bottom < adjacentCard.top) {
-					console.log(currentCard.bottom + ' has a lower rank than ' + adjacentCard.top);
-				} else {
-					console.log(currentCard.bottom + ' has the same rank as ' + adjacentCard.top);
-				};
+				compareCards("bottom", "top")
 			};
 
 			// compare card's right value to card after it's left value
 			adjacentCard = gameBoard[spaceID+1];
 			if (spaceID % 3 !== 2 && (typeof adjacentCard == 'object')) {
-			 	if (currentCard.right > adjacentCard.left) {
-					console.log(currentCard.right + ' has a higher rank than ' + adjacentCard.left);
-					if (currentCard.color !== adjacentCard.color) {
-					currentPlayer.points++;
-					inactivePlayer.points--;
-					};
-					adjacentCard.color = currentCard.color;
-					$('div [data-name="' + adjacentCard.name + '"]').css("background-color", adjacentCard.color);
-				} else if (currentCard.right < adjacentCard.left) {
-					console.log(currentCard.right + ' has a lower rank than ' + adjacentCard.left);
-				};
+				compareCards("right", "left");
 			};
 
 			// compare card's left value to card to the before it's right value
 			adjacentCard = gameBoard[spaceID-1];
 			if (spaceID % 3 !== 0 && (typeof adjacentCard == 'object')) {
-			 	if (currentCard.left > adjacentCard.right) {
-					console.log(currentCard.left + ' has a higher rank than ' + adjacentCard.right);
-					if (currentCard.color !== adjacentCard.color) {
-					currentPlayer.points++;
-					inactivePlayer.points--;
-					};
-					adjacentCard.color = currentCard.color;
-					$('div [data-name="' + adjacentCard.name + '"]').css("background-color", adjacentCard.color);
-				} else if (currentCard.left < adjacentCard.right) {
-					console.log(currentCard.left + ' has a lower rank than ' + adjacentCard.right);
-				};
+				compareCards("left", "right");
 			};
 
 			// Update turn and call related functions
