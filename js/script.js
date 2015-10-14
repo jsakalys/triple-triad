@@ -253,11 +253,16 @@ var makeDroppable = function() {
 
 			// After all cards have been played, determine Winner
 			if (turnCount == gameBoard.length) {
-				$('#extra').html('The game is over.')
-				console.log('The game is over.')
 				// clear turn indicator
-				$('#turn-count').html('');
+				$('#turn-count').html('The game is over.');
 				// check points to determine winner and alert winner
+				if (player1.points > player2.points) {
+					$('#extra').html(player1.name.toString() + ' wins.');
+				} else if (player2.points > player1.points) {
+					$('#extra').html(player2.name.toString() + ' wins.');
+				} else {
+					$('#extra').html('Draw.');
+				};
 			};
 		} // ! do not put semicolon here, because jquery
 	});
