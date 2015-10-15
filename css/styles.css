@@ -110,6 +110,17 @@ div {
 	margin: 25px;
 }
 
+#footer {
+	width: 650 px;
+	margin: 0 auto;
+	clear: both;
+	text-align: center;
+	font-family: verdana, sans-serif;
+	font-size: 10px;
+	padding: 25px;
+	line-height: 14px;
+}
+
 .space {
 	width: 100px;
 	height: 130px;
