@@ -5,6 +5,22 @@ body {
 	color: white;
 }
 
+a:link {
+	color: white;
+	text-decoration: none;
+}
+
+a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+a:hover {
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
 input {
 	color: black;
 }

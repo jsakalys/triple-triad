@@ -1,0 +1,327 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"global",
+				"globalSquareCounter"
+			],
+			[
+				"change",
+				"changeBoardSize"
+			],
+			[
+				"number",
+				"numberOfEbayCanons"
+			],
+			[
+				"numberOf",
+				"numberOfEbayCanons"
+			],
+			[
+				"numb",
+				"numberOfBackorderProducts"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 87.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 403.0
+	},
+	"console":
+	{
+		"height": 88.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/Athena/Code/WDI/PROJECTS/game-project/readme.md",
+		"/Users/Athena/Code/WDI/PROJECTS/triple-triad/index.html",
+		"/Users/Athena/Code/WDI/PROJECTS/triple-triad/css/styles.css",
+		"/Users/Athena/Code/WDI/PROJECTS/triple-triad/README.md",
+		"/Users/Athena/Code/WDI/PROJECTS/game-project/index.html",
+		"/Users/Athena/Code/WDI/PROJECTS/triple-triad/css/normalize.css",
+		"/Users/Athena/Code/WDI/PROJECTS/triple-triad/js/cards.js",
+		"/Users/Athena/Code/WDI/PROJECTS/triple-triad/js/script.js",
+		"/Users/Athena/Code/WDI/PROJECTS/game-project/js/script.js",
+		"/Users/Athena/Code/WDI/localstorage/index.html",
+		"/Users/Athena/Code/WDI/localstorage/script.js",
+		"/Users/Athena/.zshrc",
+		"/Users/Athena/Code/WDI/PROJECTS/game-project/css/styles.css",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w02d03/script.js",
+		"/Users/Athena/Code/WDI/html_stuff/bootstrap/styles.css",
+		"/Users/Athena/Code/WDI/html_stuff/bootstrap/index.html",
+		"/Users/Athena/Code/WDI/html_stuff/bootstrap/bootstrapstarter.html",
+		"/Users/Athena/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/Athena/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/Athena/Code/WDI/js_stuff/scope exercise/script.js",
+		"/Users/Athena/Code/WDI/js_stuff/scope exercise/exercise.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w02d03/index.html",
+		"/Users/Athena/Code/WDI/ajax_stuff/script.js",
+		"/Users/Athena/Code/WDI/ajax_stuff/index.html",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w02d02/script.js",
+		"/Users/Athena/Code/WDI/js_stuff/jquery plugin lab/script.js",
+		"/Users/Athena/Code/WDI/js_stuff/jquery plugin lab/index.html",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w02d02/index.html",
+		"/Users/Athena/Code/WDI/js_stuff/jquerydemo/script.js",
+		"/Users/Athena/Code/WDI/js_stuff/jquerydemo/jquery_lab/lab_2/script.js",
+		"/Users/Athena/Code/WDI/js_stuff/jquerydemo/jquery_lab/script.js",
+		"/Users/Athena/Code/WDI/js_stuff/jquerydemo/index.html",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/assignments/lab_iterators/reduce.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w02d01/reddit.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/assignments/lab_iterators/filter.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/assignments/lab_iterators/foreach1.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/assignments/lab_iterators/foreach2.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/assignments/lab_iterators/map.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/examples/exercise-1.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/examples/exercise-2.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/examples/exercise-3.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/examples/exercise-4.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_02_jquery_additional_topics/day_01_callbacks_iterators/examples/exercise-5.js",
+		"/Users/Athena/Code/WDI/js_stuff/callbacks/callback",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d05/tictactoe.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d05/index.html",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d05/winbycol.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d05/determinewinner.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d05/styles.css",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d04/tempconverter.js",
+		"/Users/Athena/Code/WDI/js_stuff/lab_google_products_functions/products.json",
+		"/Users/Athena/Code/WDI/js_stuff/lab_google_products_functions/google_shopping_func.js",
+		"/Users/Athena/Code/WDI/js_stuff/lab_google_products_functions/33.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d04/styles.css",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d04/index.html",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_NOTES/week_01_fundamentals/day_04_javascript_getting_functional/dusk_js_dom_manipulation/readme.md",
+		"/Users/Athena/Code/WDI/js_stuff/functions/functions_lab/numsquare.js",
+		"/Users/Athena/Code/WDI/js_stuff/functions/functions_lab/isprime.js",
+		"/Users/Athena/Code/WDI/js_stuff/functions/functions_lab/lettercount.js",
+		"/Users/Athena/Code/WDI/js_stuff/functions/functions_lab/sillysum.js",
+		"/Users/Athena/Code/WDI/js_stuff/functions/repetition.js",
+		"/Users/Athena/Code/WDI/js_stuff/functions/scope.js",
+		"/Users/Athena/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d03/google_shopping.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/w01d03/hw_google_shopping/readme.md",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/w01d03/hw_google_shopping/google_shopping.js",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/w01d03/hw_google_shopping/products.json",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow_lab/reverse.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow_lab/tempConvert.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow_lab/filterLongWords.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow_lab/grade.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow_lab/pluralizer.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow/examples.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow/ifelse.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow/whileloop.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow/switch.js",
+		"/Users/Athena/Code/WDI/js_stuff/control_flow/objectsEverywhere.js",
+		"/Users/Athena/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d02/mockup 2/css/styles.css",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d02/mockup 2/index.html",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d02/mockup1/css/styles.css",
+		"/Users/Athena/Code/WDI/WDI_SEA_04_HOMEWORK/jsakalys/w01d02/mockup1/index.html",
+		"/Users/Athena/Code/WDI/html_stuff/lab_css_positioning_lab/starter-code/index.html",
+		"/Users/Athena/Code/WDI/html_stuff/lab_css_positioning_lab/starter-code/css/main.css",
+		"/Users/Athena/Code/WDI/html_stuff/css_lab/Box Model/boxmodel.html",
+		"/Users/Athena/Code/WDI/html_stuff/css_lab/Box Model/styles.css",
+		"/Users/Athena/Code/WDI/html_stuff/css_lab/styles.css",
+		"/Users/Athena/Code/WDI/html_stuff/css_lab/index.html",
+		"/Users/Athena/Code/WDI/html_stuff/portfolio/css/styles.css",
+		"/Users/Athena/Code/WDI/html_stuff/portfolio/index.html",
+		"/Users/Athena/Code/WDI/html_stuff/portfolio/styles.css",
+		"/Users/Athena/living_room/books.txt"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 102.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"p2",
+			"draggable",
+			"printcard",
+			"currentPlayer",
+			"enable",
+			"p2points",
+			"p1points",
+			"blue",
+			"printTurn",
+			"displayTurn",
+			"gameboard",
+			"spaces",
+			"gameBoard",
+			"roundSpeed",
+			"roundspeed",
+			"gamespeed",
+			"draggable",
+			"null",
+			"235px",
+			"100px",
+			"{\n",
+			");\n",
+			"brand\": \"Nikon\"",
+			"\"brand\": \"Nikon\"",
+			"Name",
+			"name",
+			"Name",
+			"name",
+			"Name",
+			"Names should go here",
+			"return",
+			"backorder",
+			"brand\": \"canon\"",
+			"brand\": \"Canon\"",
+			"brand: \"canon\"",
+			"};",
+			"h",
+			"both"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 32.0
+	},
+	"pinned_build_system": "",
+	"project": "styles.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"portfolio/css/styles.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 235.0,
+	"status_bar_visible": false,
+	"template_settings":
+	{
+	}
+}
