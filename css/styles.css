@@ -1,19 +1,50 @@
+body {
+	font-family: 'Oleo Script', cursive;
+	margin-top: 25px;
+	background-image: url('../img/stardust.png');
+	color: white;
+}
+
+input {
+	color: black;
+}
+
+button {
+	outline: none;
+	background: transparent;
+	border: solid 1px white;
+	border-radius: 10px;
+	margin: 0px 10px;
+	padding: 10px;
+}
+
+button:hover {
+	background-color: rgba(250,250,250,.25);
+}
+button:active {
+	position:relative;
+	top:2px;
+}
+
 #wrapper {
-	border: solid 1px green;
 }
 
 #main {
-	width: 500px;
+	width: 650px;
 	margin: 0 auto;
 	overflow: hidden;
-	background-color: lightGray;
 }
 
 #title {
-	width: 500px;
-	height: 50px;
+	width: 650px;
 	margin: 0 auto;
 	text-align: center;
+}
+
+h1 {
+	font-size: 42px;
+	font-weight: bold;
+	margin: 0;
 }
 
 div {
@@ -21,7 +52,7 @@ div {
 }
 
 #status {
-	width: 500px;
+	width: 650px;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -30,30 +61,37 @@ div {
 	width: 300px;
 	height: 50px;
 	float: left;
+	margin: 25px;
+	margin-bottom: 0px;
 }
 
 #p1-name, #p2-name {
 	width: 100px;
 	height: 50px;
+	font-size: 24px;
 	float: left;
-	border: solid 1px purple;
+	margin: 25px;
+	margin-bottom: 0px;
 }
 
 #game-board {
 	width: 300px;
 	height: 390px;
 	float: left;
+	margin: 0px 25px;
+	background: rgba(250, 250, 250, 0.25);
 }
 
 #p1-hand, #p2-hand {
 	width: 100px;
 	height: 390px;
 	float: left;
-	border: solid 1px blue;
+	margin: 0px 25px;
+	background: rgba(250, 250, 250, 0.25);
 }
 
 #score {
-	width: 500px;
+	width: 650px;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -62,50 +100,60 @@ div {
 	width: 100px;
 	height: 50px;
 	float: left;
-	border: solid 1px purple;
+	margin: 25px;
 }
 
 #extra {
 	width: 300px;
 	height: 50px;
 	float: left;
+	margin: 25px;
 }
 
 .space {
 	width: 100px;
 	height: 130px;
-	background-color: lightYellow;
 	float: left;
-}
-
-.space-hover {
-	background-color: lightGreen;
+	border: solid 1px rgba(250,250,250,.25);
 }
 
 .card {
 	width: 100px;
 	height: 130px;
-	border: 1px solid black;
+	border: 1px solid white;
 	margin-bottom: -65px;
-	top: -200px;
+	top: -400px;
 }
 
 .card-front {
-	background-color: blue;
+	background: linear-gradient(135deg, rgba(0,183,234,1) 0%,rgba(0,158,195,1) 100%); 
+	padding: 10px;
+	font-size: 14px;
+	line-height: 14px;
 }
 
 .card-back {
-	background-color: red;
+	background: linear-gradient(135deg, rgba(255,25,94,1) 0%,rgba(210,2,85,1) 100%); 
+	padding: 10px;
+	font-size: 14px;
+	line-height: 14px;
+}
+
+.card-rank {
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+.card-name {
+	float: left;
 }
 
 .draggable {
-	/* helps to prevent a jquery error when it tries to re-enable dragging */
+/* helps to prevent a jquery error when it tries to re-enable dragging */
 }
 
-/*.p1 {
-	background-color: blue;
+.p1 {
 }
 
 .p2 {
-	background-color: red;
-}*/
+}

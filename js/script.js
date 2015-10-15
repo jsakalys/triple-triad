@@ -31,8 +31,45 @@ var inactivePlayer = null;
 var turnCount = 0;
 
 // Prompt players for name and store in variable
-// player1.name = prompt('What is your name?');
-// player2.name = prompt('What is your name?');
+var getNames = function() {
+	swal({
+		title: "Player 1",
+		text: "Please enter your name:",
+		type: "input",
+		showCancelButton: true,
+		closeOnConfirm: false,
+		animation: "slide-from-top",
+		inputPlaceholder: "Name"
+	},
+		function(inputValue) {
+			if (inputValue === false) return false;
+			if (inputValue === "") {
+				swal.showInputError("You need to write something!");
+				return false
+			}
+			player1.name = inputValue;
+
+			// Player 2 name prompt
+			swal({
+				title: "Player 2",
+				text: "Please enter your name:",
+				type: "input",
+				showCancelButton: true,
+				closeOnConfirm: true,
+				animation: "slide-from-top",
+				inputPlaceholder: "Name"
+			},
+				function(inputValue){
+					if (inputValue === false) return false;
+					if (inputValue === "") {
+						swal.showInputError("You need to write something!");
+						return false
+					}
+					player2.name = inputValue;
+					printNames();
+			});
+	});
+};
 
 //\\ FUNCTIONS //\\
 
@@ -118,17 +155,17 @@ var assignColor = function(player, color) {
 var printCards = function() {
 	// for player 1
 	player1.hand.forEach(function(card, index) {
-		$('#p1-hand').append('<div class="card draggable p1" data-name="' + card.name + '" id="' + index + '"><div class="card-front">Front: ' + card.name + '</div><div class="card-back">Back: ' + card.name + '</div></div>');
+		$('#p1-hand').append('<div class="card draggable p1" data-name="' + card.name + '" id="' + index + '"><div class="card-front">' + card.top + '<br>' + card.left + ' ' + card.right + '<br>' + card.bottom + '</div><div class="card-back">' + card.top + '<br>' + card.left + ' ' + card.right + '<br>' + card.bottom + '</div></div>');
 	});
 	// for player 2
 	player2.hand.forEach(function(card, index) {
-		$('#p2-hand').append('<div class="card draggable p2" data-name="' + card.name + '" id="' + index + '"><div class="card-front">Front: ' + card.name + '</div><div class="card-back">Back: ' + card.name + '</div></div>');
+		$('#p2-hand').append('<div class="card draggable p2" data-name="' + card.name + '" id="' + index + '"><div class="card-front">' + card.top + '<br>' + card.left + ' ' + card.right + '<br>' + card.bottom + '</div><div class="card-back">' + card.top + '<br>' + card.left + ' ' + card.right + '<br>' + card.bottom + '</div></div>');
 	});
 };
 
 // Display a chain animation when new card divs are dealt
 var animateCards = function() {
-	var dealDuration = 400;
+	var dealDuration = 300;
 	$('div.card:nth-child(5)').animate({ "top": "0px" }, {duration:dealDuration, complete: function() {
 		$('div.card:nth-child(4)').animate({ "top": "0px" }, {duration:dealDuration, complete: function() {
 			$('div.card:nth-child(3)').animate({ "top": "0px" }, {duration:dealDuration, complete: function() {
@@ -176,7 +213,7 @@ var restrictPlayer = function() {
 // Inside gameboard div, map a div for each space with unique id
 var makeSpaces = function() {
 	for (var i = 0; i < gameBoard.length; i++) {
-	$('#game-board').append('<div class="space" id="' + i + '">' + i + '</div>')
+	$('#game-board').append('<div class="space" id="' + i + '"></div>')
 	};
 };
 
@@ -184,7 +221,6 @@ var makeSpaces = function() {
 var makeDroppable = function() {
 	$('.space').droppable({
 		accept: ".card",
-		hoverClass: "space-hover",
 		tolerance: "intersect",
 		// When a card is dropped, move card object into gameboard array at appropriate index
 		drop: function(event, ui) {
@@ -251,9 +287,9 @@ var makeDroppable = function() {
 				$('#turn-count').html('The game is over.');
 				// Check points to determine winner and alert winner
 				if (player1.points > player2.points) {
-					$('#extra').html(player1.name.toString() + ' wins.');
+					$('#extra').html(player1.name.toString() + ' wins!');
 				} else if (player2.points > player1.points) {
-					$('#extra').html(player2.name.toString() + ' wins.');
+					$('#extra').html(player2.name.toString() + ' wins!');
 				} else {
 					$('#extra').html('Draw.');
 				};
@@ -271,6 +307,9 @@ function resetGame() {
 	$('#game-board').html('')
 	$('#p1-hand').html(''); 
 	$('#p2-hand').html('');
+	$('#p1-points').html('');
+	$('#p2-points').html('');
+	$('#turn-count').html('');
 	// Reset board array
 	gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]; 
 	// Reset turn count
@@ -285,11 +324,10 @@ var dealNew = function() {
 	dealHand(player2);
 	assignColor(player1, "blue");
 	assignColor(player2, "red");
-}
+};
 
 var updateInfo = function() {
 	printTurn();
-	printNames();
 	printPoints();
 };
 
@@ -303,9 +341,7 @@ var initializeCards = function() {
 var initializeSpaces = function() {
 	makeSpaces();
 	makeDroppable();
-}
-
-
+};
 
 $(document).ready(function() {
 
@@ -326,6 +362,16 @@ $(document).ready(function() {
 	// Make button for clear board and relevant functions
 	$('#clear-button').on('click', function(){
 		resetGame();
+	});
+
+	// Make button to change player name
+	$('#namechange-button').on('click', function() {
+		getNames();
+	});
+
+	// How to button instructions popup
+	$('#howto-button'). on('click', function() {
+		swal("How to Play", "Each player is dealt five cards from the deck. Every card has four numbers in the top corner. These are called the card's 'rank', and represent the strength of the corresponding side of the card. To claim an opponent's card, the rank of your card must be higher than that of the adjacent card's rank. The player with the most cards at the end is the winner.")
 	});
 
 }); // End document ready function
