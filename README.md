@@ -3,8 +3,9 @@
 This is a browser-based mockup of the popular game Triple Triad, from the Final Fantasy video game series. It uses jQuery's draggable and droppable features, as well as grid snapping to achieve a quick and easy gameboard feel. The 11 cards in the deck are based off of the level 1 cards from Final Fantasy VIII. More cards will be added in the future.
 
 ### Screenshots
-<img src="img/triple-triad_screenshot.png" width="300">
-<img src="img/triple-triad_screenshot_2.png" width="300">
+<img src="img/triple-triad_screenshot.png" width="280">
+<img src="img/triple-triad_screenshot_2.png" width="280">
+<img src="img/triple-triad_screenshot_3.png" width="280">
 
 ### Features
 * Customizable player names
